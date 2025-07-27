@@ -6,7 +6,7 @@ const generateTokens = require("../utilities/generateTokens");
 const refresh = async (req, res) => {
 	try {
 		const cookies = req.cookies;
-		if (!cookies?.refreshToken) return res.status(403).json({ Error: "Access Denied" });
+		if (!cookies?.refreshToken) return res.status(401).json({ Error: "Unauthorized" });
 
 		const token = cookies.refreshToken;
 		const user = await User.findOne({ token: token });

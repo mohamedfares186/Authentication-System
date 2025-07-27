@@ -3,7 +3,7 @@ const User = require("../models/users");
 const logout = async (req, res) => {
 	try {
 		const cookies = req.cookies;
-		if (!cookies?.refreshToken) return res.status(403).json({ Error: "Access Denied" });
+		if (!cookies?.refreshToken) return res.status(401).json({ Error: "Unauthorized" });
 
 		const token = cookies.refreshToken;
 		await User.updateOne(

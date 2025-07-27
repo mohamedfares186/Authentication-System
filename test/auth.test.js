@@ -169,8 +169,8 @@ describe("Testing Refresh API", () => {
 
 		const res = await agent.get("/api/auth/refresh");
 
-		expect(res.statusCode).toBe(403);
-		expect(res.body.Error).toBe("Access Denied");
+		expect(res.statusCode).toBe(401);
+		expect(res.body.Error).toBe("Unauthorized");
 	});
 
 	test("User Not Found in the cookies", async () => {
@@ -215,8 +215,8 @@ describe("Testing logout", () => {
 
 		const res = await agent.post("/api/auth/logout");
 
-		expect(res.statusCode).toBe(403);
-		expect(res.body.Error).toBe("Access Denied");
+		expect(res.statusCode).toBe(401);
+		expect(res.body.Error).toBe("Unauthorized");
 	});
 
 	test("Logged out successfully", async () => {

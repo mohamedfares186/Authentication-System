@@ -3,6 +3,7 @@ const User = require("../models/users");
 const bcrypt = require("bcryptjs");
 const generateTokens = require("../utilities/generateTokens");
 const emails = require("../utilities/sendEmails");
+const { generateId } = require("../utilities/generateIds");
 
 
 // Controller
@@ -39,6 +40,7 @@ const register = async (req, res) => {
 		const { token, hashedToken } = generateTokens.generateToken();
 
 		const user = new User({
+			userId: generateId(),
 			firstName: firstName,
 			lastName: lastName,
 			email: email,
