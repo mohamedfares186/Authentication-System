@@ -1,8 +1,8 @@
-const { customAlphabet } = require("nanoid");
+const nanoid = require("nanoid");
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const generateId = () => {
-	const id = customAlphabet(alphabet, 21);
+	const id = nanoid.customAlphabet(alphabet, 21);
 	return id();
 };
 
