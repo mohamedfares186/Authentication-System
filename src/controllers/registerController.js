@@ -1,9 +1,9 @@
-require("dotenv").config();
-const User = require("../models/users");
-const bcrypt = require("bcryptjs");
-const generateTokens = require("../utilities/generateTokens");
-const emails = require("../utilities/sendEmails");
-const { generateId } = require("../utilities/generateIds");
+import "dotenv/config";
+import User from "../models/users.js";
+import bcrypt from "bcryptjs";
+import { generateToken } from "../utilities/generateTokens.js";
+import sendEmail from "../utilities/sendEmails.js";
+import generateId from "../utilities/generateId.js";
 
 
 // Controller
@@ -37,7 +37,7 @@ const register = async (req, res) => {
 
 		const passwordHash = await bcrypt.hash(repeatPassword, 10);
 
-		const { token, hashedToken } = generateTokens.generateToken();
+		const { token, hashedToken } = generateToken();
 
 		const user = new User({
 			userId: generateId(),
@@ -55,7 +55,7 @@ const register = async (req, res) => {
 
 		const verifyLink = `http://localhost:${process.env.PORT || 8080}/api/auth/verify-email/${token}`;
 
-		await emails.sendEmail(
+		await sendEmail(
 			user.email,
 			"Verify your Email",
 			`${verifyLink}`
@@ -71,4 +71,4 @@ const register = async (req, res) => {
 	}
 };
 
-module.exports = { register };
+export default register;

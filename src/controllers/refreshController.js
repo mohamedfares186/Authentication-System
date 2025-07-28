@@ -1,7 +1,7 @@
-const User = require("../models/users");
-const jwt = require("jsonwebtoken");
-const { refreshTokenSecret } = require("../config/jwt");
-const generateTokens = require("../utilities/generateTokens");
+import User from "../models/users.js";
+import jsonwebtoken from "jsonwebtoken";
+import { refreshTokenSecret } from "../config/jwt.js";
+import { generateAccessToken } from "../utilities/generateTokens.js";
 
 const refresh = async (req, res) => {
 	try {
@@ -12,9 +12,9 @@ const refresh = async (req, res) => {
 		const user = await User.findOne({ token: token });
 		if (!user) return res.status(404).json({ Error: "User Not Found" });
 
-		jwt.verify(token, refreshTokenSecret, (err, decoded) => {
+		jsonwebtoken.verify(token, refreshTokenSecret, (err, decoded) => {
 			if (err) return res.status(403).json({ Error: "Access Denied" });
-			const accessToken = generateTokens.generateAccessToken(decoded);
+			const accessToken = generateAccessToken(decoded);
 				res.cookie("accessToken", accessToken, {
 		        httpOnly: true,
 		        secure: false, // Set to true in Production
@@ -29,4 +29,4 @@ const refresh = async (req, res) => {
 	}
 };
 
-module.exports = { refresh };
+export default refresh;

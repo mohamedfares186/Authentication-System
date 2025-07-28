@@ -1,4 +1,4 @@
-const User = require("../models/users");
+import User from "../models/users.js";
 
 const logout = async (req, res) => {
 	try {
@@ -30,4 +30,4 @@ const logout = async (req, res) => {
 	}
 };
 
-module.exports = { logout };
+export default logout;

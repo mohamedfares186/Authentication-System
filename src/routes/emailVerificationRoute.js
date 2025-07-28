@@ -1,8 +1,7 @@
-const express = require("express");
+import express from "express";
+import emailVerification from "../controllers/emailVerificationController.js";
 const router = express.Router();
-const emailVerification = require("../controllers/emailVerificationController");
 
+router.get("/verify-email/:token", emailVerification);
 
-router.get("/verify-email/:token", emailVerification.emailVerification);
-
-module.exports = router;
+export default router;

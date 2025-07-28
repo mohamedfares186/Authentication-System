@@ -1,6 +1,6 @@
-const User = require("../models/users");
-const generateTokens = require("../utilities/generateTokens");
-const bcrypt = require("bcryptjs");
+import User from "../models/users.js";
+import { generateRefreshToken, generateAccessToken } from "../utilities/generateTokens.js";
+import bcrypt from "bcryptjs";
 
 
 const login = async (req, res) => {
@@ -14,8 +14,8 @@ const login = async (req, res) => {
 		const match = await bcrypt.compare(password, user.password);
 		if (!match) return res.status(400).json({ Error: "Invalid Credentials" });
 
-		const refreshToken = generateTokens.generateRefreshToken(user);
-		const accessToken = generateTokens.generateAccessToken(user);
+		const refreshToken = generateRefreshToken(user);
+		const accessToken = generateAccessToken(user);
 
 		await User.updateOne(
 			{ username: user.username },
@@ -51,4 +51,4 @@ const login = async (req, res) => {
 	}
 };
 
-module.exports = { login };
+export default login;

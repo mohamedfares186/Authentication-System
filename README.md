@@ -45,7 +45,7 @@ A secure and production-ready authentication system built with **Node.js**, **Ex
 | **jsonwebtoken**       | Auth tokens                |
 | **Nodemailer**         | Email services             |
 | **express-rate-limit** | Throttle requests          |
-| **Jest**               | Testing framework          |
+| **Vitest**             | Testing framework          |
 | **Supertest**          | HTTP assertions            |
 | **nodemailer-mock**    | Email mocking during tests |
 | **ESLint**             | Code linting               |
@@ -101,6 +101,23 @@ CLIENT_URL=http://localhost:3000
 ```
 npm test
 ```
+
+---
+
+## 📚 References
+
+- [Express.js Documentation](https://expressjs.com/)
+- [MongoDB with Mongoose](https://mongoosejs.com/docs/)
+- [Express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
+- [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [nanoid](https://github.com/ai/nanoid#readme)
+- [Vitest Testing Framework](https://vitest.dev/)
+- [Supertest](https://www.npmjs.com/package/supertest)
+- [eslint](https://eslint.org/docs/latest/)
+- [Nodemailer](https://nodemailer.com/about/)
+- [nodemailer-mock](https://www.npmjs.com/package/nodemailer-mock)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+
 
 ---
 

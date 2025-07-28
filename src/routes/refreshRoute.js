@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
+import refresh from "../controllers/refreshController.js";
 const router = express.Router();
-const refreshController = require("../controllers/refreshController");
 
-router.get("/refresh", refreshController.refresh);
+router.get("/refresh", refresh);
 
-module.exports = router;
+export default router;

@@ -1,9 +1,9 @@
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const { accessTokenSecret, refreshTokenSecret } = require("../config/jwt");
+import jsonwebtoken from "jsonwebtoken";
+import crypto from "crypto";
+import { accessTokenSecret, refreshTokenSecret } from "../config/jwt.js";
 
 const generateRefreshToken = (user) => {
-	const token = jwt.sign(
+	const token = jsonwebtoken.sign(
 		{ username: user.username, role: user.role },
 		refreshTokenSecret,
 		{ expiresIn: "7d" }
@@ -12,8 +12,8 @@ const generateRefreshToken = (user) => {
 };
 
 const generateAccessToken = (user) => {
-	const token = jwt.sign(
-		{ _id: user._id, username: user.username, role: user.role },
+	const token = jsonwebtoken.sign(
+		{ userId: user.userId, username: user.username, role: user.role },
 		accessTokenSecret,
 		{expiresIn: "15m"}
 	);
@@ -26,8 +26,8 @@ const generateToken = () => {
 	return { token, hashedToken };
 };
 
-module.exports = {
+export {
 	generateRefreshToken,
 	generateAccessToken,
-	generateToken,
-};
+	generateToken
+}

@@ -1,6 +1,6 @@
-const User = require("../models/users");
-const generateTokens = require("../utilities/generateTokens");
-const emails = require("../utilities/sendEmails");
+import User from "../models/users.js";
+import { generateToken } from "../utilities/generateTokens.js";
+import sendEmail from "../utilities/sendEmails.js";
 
 const forgetPassword = async (req, res) => {
   try {
@@ -10,14 +10,14 @@ const forgetPassword = async (req, res) => {
     const user = await User.findOne({ email: email });
     if (!user) return res.status(404).json({ Error: "User Not Found" });
 
-    const { token, hashedToken } = generateTokens.generateToken();
+    const { token, hashedToken } = generateToken();
 
     user.resetPasswordToken = hashedToken;
     user.resetPasswordExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
 
     user.save();
     const resetLink = `http://localhost:${process.env.PORT || 8080}/api/auth/reset-password/${token}`;
-    await emails.sendEmail(
+    await sendEmail(
       email,
       "Password Reset",
       `Click the link to reset your password ${resetLink}`
@@ -30,4 +30,4 @@ const forgetPassword = async (req, res) => {
   }
 };
 
-module.exports = { forgetPassword };
+export default forgetPassword;

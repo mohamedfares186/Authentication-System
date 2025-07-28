@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 const app = express();
 
 // Dependencies
-const cookieParser = require("cookie-parser");
-const logger = require("./src/middleware/logger");
-const rateLimit = require("./src/middleware/rateLimit");
-const errorHandling = require("./src/middleware/errorHandling");
+import cookieParser from "cookie-parser";
+import logger from "./src/middleware/logger.js";
+import limiter from "./src/middleware/rateLimit.js";
+import errorHandling from "./src/middleware/errorHandling.js";
 
 // middleware
 app.use(cookieParser());
@@ -13,22 +13,22 @@ app.use(express.json());
 app.use(logger);
 
 // Routes
-const registration = require("./src/routes/registerRoute");
-const emailVerification = require("./src/routes/emailVerificationRoute");
-const login = require("./src/routes/loginRoute");
-const refresh = require("./src/routes/refreshRoute");
-const logout = require("./src/routes/logoutRoute");
-const forgetPassword = require("./src/routes/forgetPasswordRoute");
-const resetPassword = require("./src/routes/resetPasswordRoute");
+import registration from "./src/routes/registerRoute.js";
+import emailVerification from "./src/routes/emailVerificationRoute.js";
+import login from "./src/routes/loginRoute.js";
+import refresh from "./src/routes/refreshRoute.js";
+import logout from "./src/routes/logoutRoute.js";
+import forgetPassword from "./src/routes/forgetPasswordRoute.js";
+import resetPassword from "./src/routes/resetPasswordRoute.js";
 
-app.use("/api/auth", rateLimit, registration);
-app.use("/api/auth", rateLimit, emailVerification);
-app.use("/api/auth", rateLimit, login);
-app.use("/api/auth", rateLimit, refresh);
-app.use("/api/auth", rateLimit, logout);
-app.use("/api/auth", rateLimit, forgetPassword);
-app.use("/api/auth", rateLimit, resetPassword);
+app.use("/api/auth", limiter, registration);
+app.use("/api/auth", limiter, emailVerification);
+app.use("/api/auth", limiter, login);
+app.use("/api/auth", limiter, refresh);
+app.use("/api/auth", limiter, logout);
+app.use("/api/auth", limiter, forgetPassword);
+app.use("/api/auth", limiter, resetPassword);
 
 app.use(errorHandling);
 
-module.exports = app;
+export default app;

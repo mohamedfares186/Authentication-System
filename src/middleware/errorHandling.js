@@ -10,4 +10,4 @@ const errorHandling = (err, req, res, next) => {
 	res.sendStatus(statusCode);
 }
 
-module.exports = errorHandling;
+export default errorHandling;

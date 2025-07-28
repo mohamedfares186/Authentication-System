@@ -1,5 +1,5 @@
-const User = require("../models/users");
-const crypto = require("crypto");
+import User from "../models/users.js";
+import crypto from "crypto";
 
 
 const emailVerification = async (req, res) => {
@@ -26,4 +26,4 @@ const emailVerification = async (req, res) => {
 	}
 }
 
-module.exports = { emailVerification };
+export default emailVerification;
